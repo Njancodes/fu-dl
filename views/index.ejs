@@ -30,10 +30,11 @@
         </form>
         <b>Files uploaded: </b>
         <div id="list-of-files">
-            <% Object.keys(files).forEach(ele=>{ %>
-                <div class="file-item" id=<%= ele%>>
+            <% files.forEach(ele=>{ %>
+                <div class="file-item" id=<%= ele.id%>>
                     <img src="/ImageIcon.svg" class="upload-icon" alt="This file is an image">
-                    <button class="real-delete-button upload-icon trash-icon" style="position: absolute; left: 295px; opacity: 0;"></button>
+                    <%= ele.name %> 
+                    <button class="real-delete-button upload-icon trash-icon" style="position: absolute; left: calc(100% - 25px); opacity: 0;"></button>
                     <img src="/TrashIcon.svg" class="upload-icon trash-icon" alt="This is the trash button">
                 </div>
             <% }) %>

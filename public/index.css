@@ -36,6 +36,8 @@
     font-weight: 400;
     font-style: normal;
     height: fit-content;
+    width: fit-content;
+    min-width: 315px;
 }
 
 .file-item {

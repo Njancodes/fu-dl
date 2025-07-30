@@ -5,9 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const deleteButtons = document.body.getElementsByClassName('real-delete-button')
 
+    document.querySelector('#upload-container').addEventListener('submit', function (e) {
+        const fileInput = document.querySelector('input[type="file"]');
+        if (!fileInput.files.length) {
+            e.preventDefault(); // Stop form submission
+            alert("Please select a file before submitting.");
+        }
+    });
+
     for (let i = 0; i < deleteButtons.length; i++) {
         deleteButtons[i].addEventListener("click", async (ev) => {
-            const resp = await fetch('/?id', {
+            const resp = await fetch(`/?id=${ev.target.parentNode.id}`, {
                 method: 'DELETE'
             })
             if (resp.ok) {
