@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/index.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <title>
+        <%=title%>
+    </title>
+</head>
+
+<body>
+    <div class="flex-container">
+        <h1 id="title">FU-DF</h1>
+        <label for="" id="style-file-upload">
+            <div id="file-upload-content">
+                Click Here to Upload File
+                <img src="/UploadIcon.svg" class="upload-icon" alt="Upload button Icon">
+            </div>
+            <input type="file" name="" id="real-file-upload">
+        </label>
+        <b>Files uploaded: </b>
+        <div id="list-of-files">
+            <div class="file-item">
+                <img src="/ImageIcon.svg" class="upload-icon" alt="This file is an image">
+                File1.jpg
+                <img src="/TrashIcon.svg" class="upload-icon trash-icon" alt="This is the trash button">
+            </div>
+            <div class="file-item">
+                <img src="/ImageIcon.svg" class="upload-icon" alt="This file is an image">
+                Watermelon.jpg
+                <img src="/TrashIcon.svg" class="upload-icon trash-icon" alt="This is the trash button">
+            </div>
+            ** ): Nothing here :( **
+        </div>
+    </div>
+</body>
+
+</html>
