@@ -15,7 +15,6 @@ app.set('views', './views')
 
 const data = {
     files: {
-        id: "Hello.jpg"
     }
 }
 
@@ -30,9 +29,6 @@ app.post("/", upload.single("file"), (req, res) => {
     res.render('index', data)
 })
 
-app.delete("/",(req,res)=>{
-    
-})
 
 
 app.listen(3000, () => {

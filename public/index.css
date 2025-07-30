@@ -35,11 +35,12 @@
     font-family: "IBM Plex Mono", monospace;
     font-weight: 400;
     font-style: normal;
-    height: 100vh;
+    height: fit-content;
 }
 
 .file-item {
     display: flex;
+    position: relative;
     background-color: #e9e9e9;
     border: black 2px solid;
     padding: 5px;
