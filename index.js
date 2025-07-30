@@ -14,7 +14,9 @@ app.set('view engine', 'ejs')
 app.set('views', './views')
 
 const data = {
-    files: [{name:"H.jpg",id:1},{name:"He.jpg",id:2},{name:"Hel.jpg",id:3}]
+    files: {
+        id: "Hello.jpg"
+    }
 }
 
 app.get("/", (req, res) => {
@@ -23,10 +25,14 @@ app.get("/", (req, res) => {
 
 app.post("/", upload.single("file"), (req, res) => {
     console.log(req.file)
-    data.files.push({name:req.file.originalname, id:data.files.length + 1});
+    let randomImageName = crypto.randomUUID()
+    data.files[randomImageName] = req.file.originalname;
     res.render('index', data)
 })
 
+app.delete("/",(req,res)=>{
+    
+})
 
 
 app.listen(3000, () => {

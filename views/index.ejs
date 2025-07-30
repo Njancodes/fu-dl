@@ -30,11 +30,11 @@
         </form>
         <b>Files uploaded: </b>
         <div id="list-of-files">
-            <% files.forEach(ele=>{ %>
+            <% Object.keys(files).forEach(ele=>{ %>
                 <div class="file-item">
                     <img src="/ImageIcon.svg" class="upload-icon" alt="This file is an image">
-                    <%= ele.name %>
-                    <img src="/TrashIcon.svg"  id=<%= ele.id %> class="upload-icon trash-icon" alt="This is the trash button">
+                    <%= files[ele] %>
+                    <img src="/TrashIcon.svg"  id=<%= ele %> class="upload-icon trash-icon" alt="This is the trash button">
                 </div>
             <% }) %>
                     ** ): Nothing here :( **
