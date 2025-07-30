@@ -5,6 +5,24 @@ import express from 'express'
 import path from 'path'
 import { DatabaseSync } from 'node:sqlite'
 import multer from 'multer'
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import dotenv from 'dotenv'
+
+dotenv.config()
+
+const bucketAccessKey = process.env.ACCESS_KEY
+const bucketSecretAccessKey = process.env.SECRET_ACCESS_KEY
+const bucketRegion = process.env.BUCKET_REGION
+const bucketName = process.env.BUCKET_NAME
+
+const s3 = new S3Client({
+    credentials: {
+        accessKeyId: bucketAccessKey,
+        secretAccessKey: bucketSecretAccessKey
+    },
+    region: bucketRegion,
+})
+
 
 const app = express()
 const upload = multer()
@@ -27,27 +45,51 @@ app.get("/", (req, res) => {
     res.render('index', data)
 })
 
-app.post("/", upload.single("file"), (req, res) => {
+app.post("/", upload.single("file"), async (req, res) => {
     console.log(req.file)
     let randomImageName = crypto.randomUUID()
 
-    db.exec(`INSERT INTO files (id,name) VALUES ('${randomImageName}','${req.file.originalname}')`)
+    const command = new PutObjectCommand({
+        Bucket: bucketName,
+        Key: randomImageName,
+        Body: req.file.buffer,
+        ContentType: req.file.mimetype
+    })
 
-    data.files = updateDatabase()
+    await s3.send(command).then(() => {
 
-    console.log(data)
-    console.log("Uploaded New File")
+        db.exec(`INSERT INTO files (id,name) VALUES ('${randomImageName}','${req.file.originalname}')`)
+
+        data.files = updateDatabase()
+
+        console.log(data)
+        console.log("Uploaded New File")
+
+    })
     res.render('index', data)
 })
 
-app.delete("/", (req, res) => {
+app.delete("/", async (req, res) => {
     const id = req.query.id
 
-    db.exec(`DELETE FROM files WHERE id = '${id}'`)
-    data.files = updateDatabase()
 
-    console.log(data)
-    console.log("Deleted a file")
+    const command = new DeleteObjectCommand({
+        Bucket: bucketName,
+        Key: id
+    })
+
+    await s3.send(command).then(() => {
+        db.exec(`DELETE FROM files WHERE id = '${id}'`)
+        data.files = updateDatabase()
+
+        console.log(data)
+        console.log("Deleted a file")
+    })
+
+
+
+
+
     res.status(204).send()
 })
 
