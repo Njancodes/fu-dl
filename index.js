@@ -3,21 +3,27 @@
 
 import express from 'express'
 import path from 'path'
+import multer from 'multer'
 
 const app = express()
+const upload = multer()
 
+app.use(express.urlencoded({extended:true}))
 app.use(express.static(path.join(import.meta.dirname, 'public')));
 app.set('view engine', 'ejs')
 app.set('views','./views')
 
 app.get("/",(req,res)=>{
     const data = {
-        user:"Nijo",
-        title:"Home Page",
-        users:["Nijo","Jino","Niyo"]
+        files:["Hello.jpg","Hi.jpg"]
     }
 
     res.render('index',data)
+})
+
+app.post("/",upload.single("file"),(req,res)=>{
+    console.log(req.file)
+    res.status(204).send();
 })
 
 app.listen(3000, ()=>{

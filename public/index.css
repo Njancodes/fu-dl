@@ -6,6 +6,14 @@
     justify-content: center;
 }
 
+#upload-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
 #title {
     font-size: 75px;
     font-family: "IBM Plex Mono", monospace;
@@ -30,7 +38,7 @@
     height: 100vh;
 }
 
-.file-item{
+.file-item {
     display: flex;
     background-color: #e9e9e9;
     border: black 2px solid;
@@ -56,6 +64,12 @@
     position: relative;
 }
 
+#style-submit-button {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+}
+
 #file-upload-content {
     display: flex;
     flex-direction: row;
@@ -73,6 +87,15 @@
     opacity: 0;
 }
 
+#real-file-upload-button {
+    z-index: 10;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
 
 
 b {
@@ -88,6 +111,6 @@ b {
     height: 25px;
 }
 
-.trash-icon{
+.trash-icon {
     margin-left: auto;
 }

@@ -1,2 +1,5 @@
 .env
 /node_modules
+hello.txt
+package-lock.json
+s3workings.js
