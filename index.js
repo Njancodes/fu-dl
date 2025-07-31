@@ -3,7 +3,7 @@
 
 import express from 'express'
 import path from 'path'
-import { DatabaseSync } from 'node:sqlite'
+import Database from 'better-sqlite3';
 import multer from 'multer'
 import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import dotenv from 'dotenv'
@@ -26,7 +26,8 @@ const s3 = new S3Client({
 
 const app = express()
 const upload = multer()
-const db = new DatabaseSync('test.db')
+const db = new Database('test.db')
+db.pragma('journal_mode = WAL')
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(import.meta.dirname, 'public')));
@@ -99,6 +100,6 @@ app.listen(3000, () => {
 })
 
 function updateDatabase() {
-    let files = db.prepare('SELECT * FROM files;').all()
+    let files = db.prepare('SELECT * FROM files').all()
     return files
 }
