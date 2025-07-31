@@ -35,4 +35,4 @@ The application uses AWS S3 as the storage backend to ensure scalability and dur
 
 # Demo Video
 
-[YouTube Video](https://www.youtube.com/watch?v=6RJZViNu9hE)
+(https://www.youtube.com/watch?v=6RJZViNu9hE)
